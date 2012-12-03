@@ -20,7 +20,12 @@ class _Frame(object):
             "__name__": frame.f_globals.get("__name__"),
             "__loader__": None,
         }
-        self.f_locals = fl = {}
+        try:
+        from raven.utils.stacks import get_stack_info
+        except ImportError:
+            pass
+        else:
+            self.f_locals = get_stack_info([(frame, 1)])[0]['vars']
         try:
             fl["__traceback_hide__"] = frame.f_locals["__traceback_hide__"]
         except KeyError:
