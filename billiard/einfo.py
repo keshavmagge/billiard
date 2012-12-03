@@ -21,7 +21,7 @@ class _Frame(object):
             "__loader__": None,
         }
         try:
-        from raven.utils.stacks import get_stack_info
+            from raven.utils.stacks import get_stack_info
         except ImportError:
             pass
         else:
